@@ -2,12 +2,15 @@
 
 import type React from "react"
 import { useCallback, useState } from 'react'
-import { RefreshCw, Loader2, Upload } from 'lucide-react'
+import { RefreshCw, Loader2, Upload, Calendar as CalendarIcon } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Calendar } from "@/components/ui/calendar"
+import { format, parseISO } from "date-fns"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { toast } from "sonner"
 
 const typeOptions: Record<string, string[]> = {
@@ -467,26 +470,66 @@ export default function Home() {
                   <Label htmlFor="policyStartDate" className="text-sm font-medium text-gray-600">
                     Policy Start Date
                   </Label>
-                  <Input
-                    id="policyStartDate"
-                    type="date"
-                    value={formData['Policy Start Date']}
-                    onChange={(e) => handleInputChange('Policy Start Date', e.target.value)}
-                    className="bg-gray-100 border-0 focus:ring-2 focus:ring-blue-500"
-                  />
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start text-left font-normal bg-gray-100 border-0 hover:bg-gray-200"
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {formData['Policy Start Date'] ? (
+                          format(parseISO(formData['Policy Start Date']), 'dd/MM/yyyy')
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={formData['Policy Start Date'] ? parseISO(formData['Policy Start Date']) : undefined}
+                        onSelect={(date) => {
+                          if (date) {
+                            handleInputChange('Policy Start Date', format(date, 'yyyy-MM-dd'));
+                          }
+                        }}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="expiryDate" className="text-sm font-medium text-gray-600">
                     Expiry Date
                   </Label>
-                  <Input
-                    id="expiryDate"
-                    type="date"
-                    value={formData['Expiry Date']}
-                    onChange={(e) => handleInputChange('Expiry Date', e.target.value)}
-                    className="bg-gray-100 border-0 focus:ring-2 focus:ring-blue-500"
-                  />
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start text-left font-normal bg-gray-100 border-0 hover:bg-gray-200"
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {formData['Expiry Date'] ? (
+                          format(parseISO(formData['Expiry Date']), 'dd/MM/yyyy')
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={formData['Expiry Date'] ? parseISO(formData['Expiry Date']) : undefined}
+                        onSelect={(date) => {
+                          if (date) {
+                            handleInputChange('Expiry Date', format(date, 'yyyy-MM-dd'));
+                          }
+                        }}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
                 </div>
               </div>
 
