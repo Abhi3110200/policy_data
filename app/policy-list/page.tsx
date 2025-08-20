@@ -155,7 +155,7 @@ const PolicyList = () => {
                     </CardHeader>
 
                     <CardContent>
-                        {policies.length === 0 ? (
+                        {filteredPolicies.length === 0 ? (
                             <div className="text-center py-8 text-gray-500">
                                 No policies found. Add your first policy to see it here.
                             </div>
