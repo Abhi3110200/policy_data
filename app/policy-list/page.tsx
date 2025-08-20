@@ -68,7 +68,7 @@ const PolicyList = () => {
                             <div className="flex items-center gap-2">
                                 <Input
                                     type="text"
-                                    placeholder="Search policies..."
+                                    placeholder="Search"
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                 />
@@ -143,7 +143,7 @@ const PolicyList = () => {
                         <div className="flex items-center gap-2">
                             <Input
                                 type="text"
-                                placeholder="Search policies..."
+                                placeholder="Search"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                             />
