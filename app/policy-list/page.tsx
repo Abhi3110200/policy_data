@@ -88,7 +88,7 @@ const PolicyList = () => {
                                                     <th
                                                         key={header}
                                                         scope="col"
-                                                        className="px-6 py-7 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                                     >
                                                         {header}
                                                     </th>
@@ -104,7 +104,7 @@ const PolicyList = () => {
                                         {filteredPolicies.map((policy, index) => (
                                             <tr key={index} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                                                 {[...Array(headers.length)].map((_, colIndex) => (
-                                                    <td key={colIndex} className="px-6 py-4 whitespace-nowrap">
+                                                    <td key={colIndex} className="px-6 py-4 text-sm whitespace-nowrap">
                                                         {policy[headers[colIndex]]}
                                                     </td>
                                                 ))}
