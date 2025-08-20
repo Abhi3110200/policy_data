@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useCallback, useState } from 'react'
-import { RefreshCw, Loader2, Upload, Calendar as CalendarIcon, Calendar1Icon } from 'lucide-react'
+import { RefreshCw, Loader2, Upload, Calendar as CalendarIcon, Calendar1Icon, FileSpreadsheet, HardDrive, File } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -10,6 +10,7 @@ import { format, parseISO } from "date-fns"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { toast } from "sonner"
+import Link from "next/link"
 
 const typeOptions: Record<string, string[]> = {
   "Motor Insurance": [
@@ -340,9 +341,16 @@ export default function Home() {
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-4xl mx-auto">
         <Card className="shadow-lg">
-          <CardHeader className="text-center">
+          <CardHeader className="flex justify-between items-center">
             <CardTitle className="text-3xl font-semibold text-gray-800">Details</CardTitle>
-           {/* <Button>Overview</Button> */}
+            <div className="flex gap-2">
+              <Link href="/policy-list" className="py-2 px-4 flex items-center gap-2 text-sm rounded-md bg-green-300 border-green-500 text-gray-800 hover:bg-green-500 hover:border-green-500 hover:text-white">
+                  <FileSpreadsheet size={14}/>
+                </Link>
+                <Link href="https://drive.google.com/drive/folders/1MGC2GvuLf3FFBqyJLF9O7Dj_hSiluf2s" target="_blank" className="py-2 px-4 flex items-center gap-2 text-sm rounded-md bg-red-300 border-red-500 text-gray-800 hover:bg-red-500 hover:border-red-500 hover:text-white">
+                  <File size={14}/>
+                </Link>
+              </div>
           </CardHeader>
           <CardContent className="p-6">
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -480,7 +488,7 @@ export default function Home() {
                       className="bg-gray-100 border-0 focus:ring-2 focus:ring-blue-500 pr-10 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-inner-spin-button]:hidden [&::-webkit-clear-button]:hidden cursor-pointer"
                     />
                     <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <CalendarIcon className="h-5 w-5 text-gray-400" />
+                      <CalendarIcon className="h-5 w-5 text-gray-600" />
                     </div>
                   </div>
                 </div>
@@ -500,7 +508,7 @@ export default function Home() {
                       className="bg-gray-100 border-0 focus:ring-2 focus:ring-blue-500 pr-10 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-inner-spin-button]:hidden [&::-webkit-clear-button]:hidden"
                     />
                     <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <CalendarIcon className="h-5 w-5 text-gray-400" />
+                      <CalendarIcon className="h-5 w-5 text-gray-600" />
                     </div>
                   </div>
                 </div>

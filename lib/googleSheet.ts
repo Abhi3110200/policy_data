@@ -4,6 +4,54 @@ interface SheetRowData {
   [key: string]: string | number | boolean | null | undefined;
 }
 
+export async function getAllSheetData() {
+  try {
+    if (typeof window !== 'undefined') {
+      throw new Error('This function should only be called on the server side');
+    }
+
+    const auth = new google.auth.GoogleAuth({
+      credentials: {
+        client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\\\n/g, '\n'),
+      },
+      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+    });
+
+    const sheets = google.sheets({ version: "v4", auth });
+    const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+    if (!spreadsheetId) throw new Error("GOOGLE_SHEET_ID is missing in env");
+
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range: 'Sheet1',
+    });
+
+    const rows = response.data.values;
+    if (!rows || rows.length === 0) {
+      console.log('No data found.');
+      return [];
+    }
+
+    // Get headers from first row
+    const headers = rows[0];
+    
+    // Convert rows to objects with headers as keys
+    const result = rows.slice(1).map(row => {
+      const obj: {[key: string]: string} = {};
+      headers.forEach((header, i) => {
+        obj[header] = row[i] || '';
+      });
+      return obj;
+    });
+
+    return result;
+  } catch (error) {
+    console.error('Error fetching sheet data:', error);
+    throw error;
+  }
+}
+
 export async function addRowToSheet(rowData: SheetRowData) {
   try {
     if (!rowData || typeof rowData !== "object" || Object.keys(rowData).length === 0) {
@@ -70,8 +118,8 @@ export async function addRowToSheet(rowData: SheetRowData) {
     const rowWithFormulas = rowValues.map((value, index) => {
       const header = headers[index];
       // If this is the PDF Link column and it's not empty, create a hyperlink formula
-      if ((header === 'PDF Link' || header === 'pdf_link' || header === 'PDF_Link') && value && value !== 'No PDF attached') {
-        return `=HYPERLINK("${value}", "View PDF")`;
+      if ((header === 'PDF Link' || header === 'pdf_link' || header === 'PDF_Link' || header === 'PDF LINK') && value && value !== 'No PDF attached') {
+        return `=HYPERLINK("${value}")`;
       }
       return value;
     });
