@@ -103,11 +103,38 @@ const PolicyList = () => {
                                     <tbody className="bg-white divide-y divide-gray-200">
                                         {filteredPolicies.map((policy, index) => (
                                             <tr key={index} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                                                {[...Array(headers.length)].map((_, colIndex) => (
-                                                    <td key={colIndex} className="px-6 py-4 text-sm whitespace-nowrap">
-                                                        {policy[headers[colIndex]]}
-                                                    </td>
-                                                ))}
+                                                {headers.map((header) => {
+                                                    const value = policy[header] || "-"
+                                                    const isPdfLink =
+                                                        (header === "PDF Link" ||
+                                                            header === "pdf_link" ||
+                                                            header === "PDF_Link" ||
+                                                            header === "PDF LINK") &&
+                                                        value &&
+                                                        value !== "-" &&
+                                                        value !== "No PDF attached"
+
+                                                    return (
+                                                        <td
+                                                            key={`${index}-${header}`}
+                                                            className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                                        >
+                                                            {isPdfLink ? (
+                                                                <a
+                                                                    href={value}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="text-blue-600 hover:text-blue-800 hover:underline"
+                                                                    onClick={(e) => e.stopPropagation()}
+                                                                >
+                                                                    View PDF
+                                                                </a>
+                                                            ) : (
+                                                                value
+                                                            )}
+                                                        </td>
+                                                    )
+                                                })}
                                             </tr>
                                         ))}
                                     </tbody>
