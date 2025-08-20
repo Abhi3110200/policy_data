@@ -493,10 +493,10 @@ export default function Home() {
                     <Input
                       id="expiryDate"
                       type="date"
+                      placeholder="Select Expiry Date"
                       value={formData['Expiry Date']}
                       onChange={(e) => handleInputChange('Expiry Date', e.target.value)}
                       onClick={(e: React.MouseEvent<HTMLInputElement>) => e.currentTarget.showPicker()}
-                      placeholder="Select Expiry Date"
                       className="bg-gray-100 border-0 focus:ring-2 focus:ring-blue-500 pr-10 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-inner-spin-button]:hidden [&::-webkit-clear-button]:hidden"
                     />
                     <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">

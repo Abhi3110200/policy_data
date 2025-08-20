@@ -142,7 +142,7 @@ export async function POST(request: Request) {
     }
 
     // Get or create the target folder
-    const folderName = 'Policy Data';
+    const folderName = 'Policy Details';
     const folderId = await getOrCreateFolder(folderName);
 
     // Upload the file
@@ -179,7 +179,7 @@ export async function POST(request: Request) {
  */
 export async function GET() {
   try {
-    const folderName = 'Policy Data';
+    const folderName = 'Policy Details';
     const folder = await drive.files.list({
       q: `mimeType='application/vnd.google-apps.folder' and name='${folderName}' and trashed=false`,
       fields: 'files(id, name)',
