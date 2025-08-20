@@ -365,7 +365,7 @@ export default function Home() {
                       <SelectValue placeholder="Select Company" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="New India Assurance">New India Assurance Co. Ltd.</SelectItem>
+                      <SelectItem value="New India Assurance Co. Ltd.">New India Assurance Co. Ltd.</SelectItem>
                       <SelectItem value="National Insurance Co. Ltd.">National Insurance Co. Ltd.</SelectItem>
                       <SelectItem value="Oriental Insurance Co. Ltd.">Oriental Insurance Co. Ltd.</SelectItem>
                       <SelectItem value="Bajaj Alianz GIC Ltd.">Bajaj Alianz GIC Ltd.</SelectItem>
