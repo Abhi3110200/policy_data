@@ -345,10 +345,10 @@ export default function Home() {
             <CardTitle className="text-3xl font-semibold text-gray-800">Details</CardTitle>
             <div className="flex gap-2">
               <Link href="/policy-list" className="py-2 px-4 flex items-center gap-2 text-sm rounded-md bg-green-300 border-green-500 text-gray-800 hover:bg-green-500 hover:border-green-500 hover:text-white">
-                  <FileSpreadsheet size={14}/>
+                  <FileSpreadsheet size={16}/>
                 </Link>
                 <Link href="https://drive.google.com/drive/folders/1MGC2GvuLf3FFBqyJLF9O7Dj_hSiluf2s" target="_blank" className="py-2 px-4 flex items-center gap-2 text-sm rounded-md bg-red-300 border-red-500 text-gray-800 hover:bg-red-500 hover:border-red-500 hover:text-white">
-                  <File size={14}/>
+                  <File size={16}/>
                 </Link>
               </div>
           </CardHeader>
